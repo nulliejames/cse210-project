@@ -9,8 +9,8 @@ class Program
         // int magicNumber = int.Parse(Console.ReadLine());  
 
         // For Part 3, where we use a random number
-        Random randomGenerator = new Random();
-        int magicNumber = randomGenerator.Next(1, 101); // Generates a random number between 1 and 100
+        Random random = new Random();
+        int magicNumber = random.Next(1, 101); // Generates a random number between 1 and 100
 
 
         int guess = -1;
@@ -18,20 +18,20 @@ class Program
         // We could also use a do-while loop here
         while (guess != magicNumber)
         {
-            Console.WriteLine("Guess a number between 1 and 100:");
+            Console.WriteLine("What is your guess? ");
             guess = int.Parse(Console.ReadLine());
 
             if (guess < magicNumber)
             {
-                Console.WriteLine("Too low! Try again.");
+                Console.WriteLine("Higher");
             }
             else if (guess > magicNumber)
             {
-                Console.WriteLine("Too high! Try again.");
+                Console.WriteLine("Lower");
             }
             else
             {
-                Console.WriteLine("Congratulations! You've guessed the magic number!");
+                Console.WriteLine("Congratulations! You guessed it!");
             }
         }
     }
