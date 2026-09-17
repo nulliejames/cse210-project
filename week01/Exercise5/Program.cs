@@ -22,18 +22,29 @@ class Program
 
     static string PromptUserName()
     {
-        Console.Write("Please enter your name: ");
-        string name = Console.ReadLine();
+        string name;
+        do
+        {
+            Console.Write("Please enter your name: ");
+            name = Console.ReadLine()?.Trim();
+        } while (string.IsNullOrWhiteSpace(name));
 
         return name;
     }
 
     static int PromptUserNumber()
     {
-        Console.Write("Please enter your favorite number: ");
-        int number = int.Parse(Console.ReadLine());
+        int number;
+        while (true)
+        {
+            Console.Write("Please enter your favorite number: ");
+            if (int.TryParse(Console.ReadLine(), out number))
+            {
+                return number;
+            }
 
-        return number;
+            Console.WriteLine("Please enter a whole number.");
+        }
     }
 
     static int SquareNumber(int number)
