@@ -4,26 +4,26 @@ class Program
 {
     static void Main(string[] args)
     {
-        Random random = new Random();
-        string playAgain = "yes";
+        Random generator = new Random();
+        bool continuePlaying = true;
 
-        while (playAgain.Equals("yes", StringComparison.OrdinalIgnoreCase))
+        while (continuePlaying)
         {
-            int magicNumber = random.Next(1, 101);
-            int guess = -1;
-            int guessCount = 0;
+            int target = generator.Next(1, 101);
+            int attempts = 0;
+            int guess;
 
-            while (guess != magicNumber)
+            do
             {
                 Console.Write("What is your guess? ");
-                guess = int.Parse(Console.ReadLine());
-                guessCount++;
+                guess = int.Parse(Console.ReadLine() ?? "0");
+                attempts++;
 
-                if (guess < magicNumber)
+                if (guess < target)
                 {
                     Console.WriteLine("Higher");
                 }
-                else if (guess > magicNumber)
+                else if (guess > target)
                 {
                     Console.WriteLine("Lower");
                 }
@@ -31,11 +31,12 @@ class Program
                 {
                     Console.WriteLine("Congratulations! You guessed it!");
                 }
-            }
+            } while (guess != target);
 
-            Console.WriteLine($"It took you {guessCount} guesses.");
+            Console.WriteLine($"It took you {attempts} guesses.");
             Console.Write("Would you like to play again? ");
-            playAgain = Console.ReadLine();
+            string answer = Console.ReadLine() ?? "";
+            continuePlaying = answer.Trim().Equals("yes", StringComparison.OrdinalIgnoreCase);
         }
     }
 

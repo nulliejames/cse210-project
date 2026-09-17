@@ -4,15 +4,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        //Ask the user for their first and last name, then display their name in the format "Last, First Last"
         Console.Write("What is your first name? ");
-        string firstName = Console.ReadLine();
+        string first = Console.ReadLine() ?? "";
 
         Console.Write("What is your last name? ");
-        string lastName = Console.ReadLine();
+        string last = Console.ReadLine() ?? "";
 
-        Console.WriteLine();
-
-        Console.WriteLine($"Your name is {lastName}, {firstName} {lastName}.");
+        Console.WriteLine($"\nYour name is {last}, {first} {last}.");
     }
 }

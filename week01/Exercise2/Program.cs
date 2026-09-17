@@ -4,57 +4,51 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Prompt the user for their grade percentage
         Console.Write("Enter your grade percentage: ");
-        int grade = int.Parse(Console.ReadLine());
+        int score = int.Parse(Console.ReadLine() ?? "0");
 
-        string letter;
+        string grade;
 
-        if (grade >= 90)
+        if (score >= 90)
         {
-            letter = "A";
+            grade = "A";
         }
-        else if (grade >= 80)
+        else if (score >= 80)
         {
-            letter = "B";
+            grade = "B";
         }
-        else if (grade >= 70)
+        else if (score >= 70)
         {
-            letter = "C";
+            grade = "C";
         }
-        else if (grade >= 60)
+        else if (score >= 60)
         {
-            letter = "D";
+            grade = "D";
         }
         else
         {
-            letter = "F";
-        }
-        string sign = "";
-        int lastDigit = grade % 10;
-
-        if (lastDigit >= 7)
-        {
-            sign = "+";
-        }
-        else if (lastDigit < 3)
-        {
-            sign = "-";
+            grade = "F";
         }
 
-        if (letter == "A" || letter == "F")
+        string modifier = "";
+        int onesPlace = Math.Abs(score) % 10;
+        if (onesPlace >= 7 && grade != "A" && grade != "F")
         {
-            sign = "";
+            modifier = "+";
+        }
+        else if (onesPlace < 3 && grade != "A" && grade != "F")
+        {
+            modifier = "-";
         }
 
-        Console.WriteLine($"Your grade is: {letter}{sign}");
-        if (grade >= 70)
+        Console.WriteLine($"Your grade is: {grade}{modifier}");
+        if (score >= 70)
         {
             Console.WriteLine("Congratulations! You passed the course.");
         }
         else
         {
-            Console.WriteLine("keep working hard. You can do better next time.");
+            Console.WriteLine("Keep working hard. You can do better next time.");
         }
     }
 }

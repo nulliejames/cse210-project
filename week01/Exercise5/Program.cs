@@ -6,13 +6,11 @@ class Program
     {
         DisplayWelcome();
 
-        string name = PromptUserName();
+        string studentName = PromptUserName();
+        int favoriteNumber = PromptUserNumber();
+        int result = SquareNumber(favoriteNumber);
 
-        int number = PromptUserNumber();
-
-        int squaredNumber = SquareNumber(number);
-
-        DisplayResult(name, squaredNumber);
+        DisplayResult(studentName, result);
     }
 
     static void DisplayWelcome()

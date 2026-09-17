@@ -9,24 +9,17 @@ class Program
 
         Console.WriteLine("Enter a list of numbers, type 0 when finished.");
 
-        int number = -1;
-
-        while (number != 0)
+        while (true)
         {
             Console.Write("Enter number: ");
-            number = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine() ?? "0");
 
-            if (number != 0)
+            if (number == 0)
             {
-                numbers.Add(number);
+                break;
             }
-        }
 
-        int sum = 0;
-
-        foreach (int item in numbers)
-        {
-            sum += item;
+            numbers.Add(number);
         }
 
         if (numbers.Count == 0)
@@ -35,30 +28,28 @@ class Program
             return;
         }
 
-        double average = (double)sum / numbers.Count;
-        int largest = numbers[0];
-        int? smallestPositive = null;
+        int total = 0;
+        int greatest = numbers[0];
+        int closestPositive = int.MaxValue;
 
-        foreach (int item in numbers)
+        foreach (int value in numbers)
         {
-            if (item > largest)
-            {
-                largest = item;
-            }
+            total += value;
+            greatest = Math.Max(greatest, value);
 
-            if (item > 0 && (smallestPositive == null || item < smallestPositive))
+            if (value > 0 && value < closestPositive)
             {
-                smallestPositive = item;
+                closestPositive = value;
             }
         }
 
-        Console.WriteLine($"The sum is: {sum}");
-        Console.WriteLine($"The average is: {average}");
-        Console.WriteLine($"The largest number is: {largest}");
+        Console.WriteLine($"The sum is: {total}");
+        Console.WriteLine($"The average is: {(double)total / numbers.Count}");
+        Console.WriteLine($"The largest number is: {greatest}");
 
-        if (smallestPositive.HasValue)
+        if (closestPositive != int.MaxValue)
         {
-            Console.WriteLine($"The smallest positive number is: {smallestPositive.Value}");
+            Console.WriteLine($"The smallest positive number is: {closestPositive}");
         }
 
         numbers.Sort();
