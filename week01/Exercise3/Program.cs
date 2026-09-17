@@ -4,35 +4,38 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Guess my number game, and the computer pick the magic number
-        // Console.WriteLine("Guess my number game, and the computer pick the magic number");
-        // int magicNumber = int.Parse(Console.ReadLine());  
-
-        // For Part 3, where we use a random number
         Random random = new Random();
-        int magicNumber = random.Next(1, 101); // Generates a random number between 1 and 100
+        string playAgain = "yes";
 
-
-        int guess = -1;
-
-        // We could also use a do-while loop here
-        while (guess != magicNumber)
+        while (playAgain.Equals("yes", StringComparison.OrdinalIgnoreCase))
         {
-            Console.WriteLine("What is your guess? ");
-            guess = int.Parse(Console.ReadLine());
+            int magicNumber = random.Next(1, 101);
+            int guess = -1;
+            int guessCount = 0;
 
-            if (guess < magicNumber)
+            while (guess != magicNumber)
             {
-                Console.WriteLine("Higher");
+                Console.Write("What is your guess? ");
+                guess = int.Parse(Console.ReadLine());
+                guessCount++;
+
+                if (guess < magicNumber)
+                {
+                    Console.WriteLine("Higher");
+                }
+                else if (guess > magicNumber)
+                {
+                    Console.WriteLine("Lower");
+                }
+                else
+                {
+                    Console.WriteLine("Congratulations! You guessed it!");
+                }
             }
-            else if (guess > magicNumber)
-            {
-                Console.WriteLine("Lower");
-            }
-            else
-            {
-                Console.WriteLine("Congratulations! You guessed it!");
-            }
+
+            Console.WriteLine($"It took you {guessCount} guesses.");
+            Console.Write("Would you like to play again? ");
+            playAgain = Console.ReadLine();
         }
     }
 
